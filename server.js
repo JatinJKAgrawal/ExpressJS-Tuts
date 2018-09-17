@@ -13,7 +13,6 @@ hbs.registerHelper('sayItLoud', (text) => {
 })
 
 app.set('view engine', 'hbs');
-app.use(express.static(__dirname + '/public'));
 app.use((req, res, next) => {
   var now = new Date().toString();
   var log = `${now} : ${req.method} ${req.url}`;
@@ -23,16 +22,11 @@ app.use((req, res, next) => {
       console.log(`Unable to append to the File`);
     }
   });
+  next();
 
 });
 
-app.use((req, res, next) => {
-    res.render('maintainance.hbs', {
-      pageTitle: 'Hi There!',
-      header: 'We\'ll be right back!',
-      para: 'Our Site is under maintainance. We\'ll be right back!'
-    });
-});
+app.use(express.static(__dirname + '/public'));
 
 app.get('/',(req, res) => {
   res.render('home.hbs', {
