@@ -37,6 +37,13 @@ app.get('/',(req, res) => {
   });
 });
 
+app.get('/projects', (req, res) => {
+  res.render('projects.hbs',{
+    pageTitle: 'projects',
+    header: 'Projects'
+  });
+});
+
 app.get('/bad',(req, res) => {
   res.send({
     Error: 'Something went wrong!'
